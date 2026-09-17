@@ -14,7 +14,7 @@
     .video-meta { font-size: 0.85rem; color: #aaaaaa; margin-bottom: 10px; }
     
     .player-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; background-color: #000; }
-    .player-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .player-wrapper video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; outline: none; }
 
     .interaction-bar { padding: 12px 0; border-bottom: 1px solid #2a2a2a; margin-bottom: 15px; }
     .action-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -39,15 +39,15 @@
         <div class="video-meta">Ditonton • Putar Otomatis / Acak</div>
       </div>
 
-      <!-- 2. PEMUTAR VIDEO IFRAME ROLLING -->
+      <!-- 2. PEMUTAR VIDEO HTML5 (DIUBAH DARI IFRAME KE VIDEO TAG UNTUK .MP4) -->
       <div class="player-wrapper">
-        <iframe id="main-iframe-player" src="" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen"></iframe>
+        <video id="main-video-player" controls playsinline></video>
       </div>
 
       <!-- 3. TOMBOL INTERAKSI -->
       <div class="interaction-bar">
         <div class="action-buttons">
-          <button class="btn" onclick="changeIframeRandomly()">🔀 Ganti Video Lain</button>
+          <button class="btn" onclick="changeVideoRandomly()">🔀 Ganti Video Lain</button>
           <button class="btn">👍 Suka</button>
           <button class="btn">↪️ Bagikan</button>
         </div>
@@ -77,77 +77,83 @@
   </div>
 
 
-  <!-- SCRIPT LOGIK ROLLING EMBED IFRAME -->
+  <!-- SCRIPT LOGIKA ROLLING VIDEO MP4 -->
   <script>
-    const iframeList = [
+    const videoList = [
       {
         title: "Japanese Hot Stepmom Take Care Of Her Son",
-        url: "https://www.xvideos.com/embedframe/opdlolu2f41",
+        url: "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/1.mp4",
         desc: "Nonton adegan spesial Japanese hot stepmom take care of her son. Kualitas HD dan lancar diputar."
       },
       {
         title: "Beautiful Japanese Wife Cheating With Her Neighbor",
-        url: "https://www.xvideos.com/embedframe/oocvddm4f4b",
+        url: "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/2.mp4",
         desc: "Streaming video adegan panas beautiful Japanese wife cheating dengan kualitas jernih."
       },
       {
         title: "Japanese MILF Hot Passionate Night Collection Part 3",
-        url: "https://www.xvideos.com/embedframe/opdcckddddb",
+        url: "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/3.mp4",
         desc: "Saksikan tayangan spesial Japanese MILF adegan romantis dengan resolusi jernih."
       },
       {
         title: "Hot Japanese Stepmom Special Afternoon Lesson",
-        url: "https://www.xvideos.com/embedframe/opdcplle35a",
+        url: "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/4.mp4",
         desc: "Video pilihan terbaik edisi Jepang paling populer, siap ditonton tanpa bufer."
       },
       {
         title: "Beautiful Asian Wife Secret Romance Episode 5",
-        url: "https://www.xvideos.com/embedframe/oibkodv4ed4",
+        url: "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/5.mp4",
         desc: "Streaming spesial adegan romantis Asian wife favorit penonton dengan kualitas tinggi."
       },
       {
         title: "Japanese Housewife Special Private Time Part 6",
-        url: "https://www.xvideos.com/embedframe/oiukchk0f79",
+        url: "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/6.mp4",
         desc: "Koleksi tayangan Japanese housewife dengan momen mendebarkan yang wajib ditonton."
       },
       {
         title: "Hot Japanese Neighbor Secret Meeting Part 7",
-        url: "https://www.xvideos.com/embedframe/oiadtahb737",
+        url: "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/7.mp4",
         desc: "Koleksi video pilihan edisi tetangga Jepang jernih dan lancar di HP."
       },
       {
         title: "Japanese Stepmom Secret Care & Massage Part 8",
-        url: "https://www.xvideos.com/embedframe/okueoev5457",
+        url: "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/8.mp4",
         desc: "Tayangan adegan pijat romantis Jepang yang sangat disukai para penonton."
       },
       {
         title: "Beautiful Japanese Girl Passionate Night Part 9",
-        url: "https://www.xvideos.com/embedframe/oivdulv0418",
+        url: "https://github.com/agusaliiariyantii-ops/lp1/releases/tag/v1/9.mp4" || "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/9.mp4",
         desc: "Video pilihan dengan alur cerita menarik dan kualitas gambar terbaik."
       },
       {
         title: "Japanese MILF Special Romance Collection Part 10",
-        url: "https://www.xvideos.com/embedframe/okveepk8de2",
+        url: "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/10.mp4",
         desc: "Koleksi pamungkas edisi MILF Jepang terbaik dengan performa streaming cepat."
       }
     ];
 
-    function changeIframeRandomly() {
-      const randomIndex = Math.floor(Math.random() * iframeList.length);
-      const selected = iframeList[randomIndex];
+    // Penyesuaian URL ke pola standard download release v1
+    videoList[8].url = "https://github.com/agusaliiariyantii-ops/lp1/releases/download/v1/9.mp4";
+
+    function changeVideoRandomly() {
+      const randomIndex = Math.floor(Math.random() * videoList.length);
+      const selected = videoList[randomIndex];
 
       const titleEl = document.getElementById('video-title-display');
       const descEl = document.getElementById('video-desc-display');
-      const playerEl = document.getElementById('main-iframe-player');
+      const playerEl = document.getElementById('main-video-player');
 
       if (titleEl) titleEl.innerText = selected.title;
       if (descEl) descEl.innerText = selected.desc;
-      if (playerEl) playerEl.src = selected.url;
+      if (playerEl) {
+        playerEl.src = selected.url;
+        playerEl.load();
+      }
     }
 
     function initPage() {
       setTimeout(() => {
-        changeIframeRandomly();
+        changeVideoRandomly();
       }, 500);
     }
   </script>
